@@ -1,29 +1,30 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Form from "./components/Form";
+import Axios from "axios";
 
 class App extends Component {
+  
+  getRecipe=(e)=>{
+    const recipeName= e.target.elements.recipeName.value
+    e.preventDefault()
+    console.log(recipeName);
+  }
   render(){
+    const API_ID="b6b2f1a9";
+    const API_KEY="60375dc6ca821f47b4bbf6fa612dc097";
+    const url = `https://api.edamam.com/search?q=chicken&app_id=${API_ID}&app_key=${API_KEY}`;
+    const getData = async() =>{
+      const result= await Axios.get(url);
+      console.log(result);
+    }
+
     return (
-    <div className="App">
+      <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p class="">SONNY</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Receipe HAHAHA
-        </a>
-        <div class="alert alert-danger" role="alert">
-          A simple primary alert—check it out!
-        </div>
+        <h1 className="App-title" onClick={getData}>Recipe Search</h1>
       </header>
+      <Form getRecipe={this.getRecipe}/>
     </div>
   );
   }
