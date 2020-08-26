@@ -9,8 +9,8 @@ const API_KEY="60375dc6ca821f47b4bbf6fa612dc097";
 
 class App extends Component {
   state={
-    food:undefined,
-    error:undefined
+    food:null,
+    error:null
   }
   getRecipe = async (e)=>{
     e.preventDefault();
@@ -21,12 +21,12 @@ class App extends Component {
     if(food){
       if(data.hits.length === 0){
         this.setState({
-          food: [],
+          food: null,
           error:"No answer"
         })
       }else if(data.cod === 404){
         this.setState({
-          food: [],
+          food: null,
           error:"ERRO HAPPENDS"
         })
       }else{
@@ -37,8 +37,8 @@ class App extends Component {
       }
     }else{
       this.setState({
-        food: [],
-        error:""
+        food: null,
+        error:null
       })
     }
   }
